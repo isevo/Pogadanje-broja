@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" >
+    <title>Iga pogađanja broja</title>
+    
+</head>
+<body>
+    <center>
+    <p><h2>Opis igre</h2>
+    U txt box upisite broj u rasponu od 1 do 100 i potom kliknite na botun.Ako ste pogodili broj
+    ispisati ce vam se poruka na ekran ,a ko niste dobit cete hint za nastavak igre,ali  oprez,IMATE SAMO 10
+    POKUSAJA!Nakon toga je kraj igre.
+    <br>
+    <br>
+
+    <input class="form-control form-control-lg" type="text" id="txtbox" placeholder="number">
+    <br>
+    <button type="button" class="btn btn-primary btn-block" onclick="getValue()">Click</button>
+    Vas broj:<label for="fname" id="ispis"></label>
+    <br>
+    Svi dosadasnji pokusaji:<label for="fname" id="sviPokusaji"></label>
+    <br>
+    Broj preostalih pokusaja:<label for="fname" id="brojPokusaja">10</label>
+    <br>
+    <label for="hint" id="hint"></label>
+
+
+    </p>
+
+    </center>
+
+    <script>
+        niz_pokusaji=[10]
+        let brojac=0
+        let nasumican_broj=Math.floor((Math.random()*100)+1)
+        //document.write("Nasumicni broj: "+nasumican_broj)
+        let korisnikov_broj=0;
+        function getValue(){
+            korisnikov_broj=document.getElementById("txtbox").value
+           // document.write("vas Broj="+korisnikov_broj)
+           document.getElementById("ispis").innerHTML=document.getElementById("txtbox").value
+           niz_pokusaji[brojac]=korisnikov_broj
+           document.getElementById("sviPokusaji").innerHTML=niz_pokusaji
+           brojac++
+           
+           document.getElementById("brojPokusaja").innerHTML=10-brojac
+           if(korisnikov_broj==nasumican_broj && brojac<10)
+           {
+               document.getElementById("ispis").innerHTML=0
+               delete niz_pokusaji[0]
+               niz_pokusaji=[10]
+               document.getElementById("sviPokusaji").innerHTML=""
+               brojac=0
+               document.getElementById("brojPokusaja").innerHTML=brojac
+               nasumican_broj=Math.floor((Math.random()*100)+1)
+               document.getElementById("hint").innerHTML=""
+               alert("POGODAK")
+           }
+           else if(nasumican_broj> korisnikov_broj && brojac<10 )
+           {
+                document.getElementById("hint").innerHTML="Vas broj je premal u odnosu na slucajni broj "
+           }
+           else if(nasumican_broj<korisnikov_broj && brojac<10 )
+           {
+                document.getElementById("hint").innerHTML="Vas broj je velik u odnosu na slucajan broj "
+           }
+           else if (brojac==10 && korisnikov_broj!=nasumican_broj)
+           {
+               document.getElementById("ispis").innerHTML=0
+               delete niz_pokusaji[0]
+               niz_pokusaji=[10]
+               document.getElementById("sviPokusaji").innerHTML=""
+               brojac=0
+               document.getElementById("brojPokusaja").innerHTML=10
+               nasumican_broj=Math.floor((Math.random()*100)+1)
+               document.getElementById("hint").innerHTML="Nemate vise pokusaja "
+               alert("Ispucali ste sve mogucnosti!")
+           }
+        }
+       
+        
+
+    </script>
+</body>
+</html>
